@@ -1,0 +1,105 @@
+# Variants-configuration
+
+apply ****
+
+
+android {
+    compileSdkVersion **
+
+    def versionPropsFile = file('version.properties')
+    def code
+    def name
+
+    if (versionPropsFile.canRead()) {
+        def Properties versionProps = new Properties()
+
+        versionProps.load(new FileInputStream(versionPropsFile))
+        name = versionProps['VERSION_NAME'].toString()
+        code = versionProps['VERSION_CODE'].toInteger()
+//        versionProps['VERSION_CODE'] = code.toString()
+//        versionProps.store(versionPropsFile.newWriter(), null)
+    } else {
+        throw new GradleException("Could not read version.properties!")
+    }
+
+    defaultConfig {
+        applicationId "******"
+        minSdkVersion **
+        targetSdkVersion **
+        versionCode code
+        //versionName "**"
+        versionName name
+        archivesBaseName = "Name -$versionName($code)"
+        testInstrumentationRunner "***"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions 'dimentions_key' #make by your self
+    productFlavors {
+        STAGING1 {
+            dimension = 'dimentions_key'
+            manifestPlaceholders = [
+                    appName: "project_name",
+                    appIcon: "@drawable/ic_app_icon1"
+            ]
+            buildConfigField("String","BASE_URL",'"https://domain"')
+        }
+        PRODUCTION1 {
+            dimension = 'dimentions_key'
+            manifestPlaceholders = [
+                    appName: "project_name",
+                    appIcon: "@drawable/ic_app_icon1"
+            ]
+            buildConfigField("String","BASE_URL",'"https://domain"')
+        }
+        STAGING2 {
+            dimension = 'dimentions_key'
+            manifestPlaceholders = [
+                    appName: "app_name",
+                    appIcon: "@drawable/ic_app_icon2"
+            ]
+            buildConfigField("String","BASE_URL",'"http://domain"')
+
+        }
+        PRODUCTION2 {
+            dimension = 'dimentions_key'
+            manifestPlaceholders = [
+                    appName: "app_name",
+                    appIcon: "@drawable/ic_app_icon2"
+            ]
+            buildConfigField("String","BASE_URL",'"https://domain"')
+        }
+        STAGING3 {
+            dimension = "dimentions_key"
+            manifestPlaceholders = [
+                    appName: "app_name",
+                    appIcon: "@mipmap/ic_app_3"
+            ]
+            buildConfigField("String","BASE_URL",'"https://domain"')
+        }
+        PRODUCTION3 {
+            dimension = 'dimentions_key'
+            manifestPlaceholders = [
+                    appName: "app_name",
+                    appIcon: "@mipmap/ic_app_3"
+            ]
+            buildConfigField("String","BASE_URL",'"https://domain"')
+        }
+    }
+}
+repositories {
+    maven { url '************' }
+}
+dependencies {
+    /**/
+   
+    implementation **********************
+    
+    apply plugin: *******************
+    compile project(path: ':*******************')
+}
