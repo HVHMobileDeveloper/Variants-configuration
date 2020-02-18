@@ -1,0 +1,12 @@
+ <application
+        ***
+        android:icon="${appIcon}"
+        android:label="${appName}">
+        **
+        <activity
+            ****
+            android:label="${appName}"
+            ***
+            />
+            **
+        </application>
